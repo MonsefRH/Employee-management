@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Employee affectation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        .form-container h\:panelGrid {
+            width: 100%;
+        }
+        .form-container h\:inputText,
+        .form-container h\:selectOneMenu,
+        .form-container h\:selectManyListbox {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        .form-container h\:commandButton {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container h\:commandButton:hover {
+            background: #0056b3;
+        }
+
+    </style>
+</h:head>
+<h:body>
+    <h:link value="Liste des employees " outcome="list_employees" />|
+    <h:link value="Back to home" outcome="index" />
+    <br />
+    <h2>Employee affectation</h2>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="employee" value="Nom de l'employee  :" />
+            <h:selectOneMenu id="employee" value="#{AffectationController.employeeId}" required="true">
+                <f:selectItems value="#{AffectationController.employees}" var="emp" itemLabel="#{emp.nom}" itemValue="#{emp.id}" />
+            </h:selectOneMenu>
+
+            <h:outputLabel value="Projects :" />
+            <h:selectManyListbox id="projects" value="#{AffectationController.selectedProjets}" size="5" multiple="true">
+                <f:selectItems value="#{AffectationController.allProjects}" var="proj" itemLabel="#{proj.nom}" itemValue="#{proj.id}" />
+            </h:selectManyListbox>
+
+
+            <h:outputLabel for="percentage" value="Implication :" />
+            <h:selectOneMenu id="percentage" value="#{AffectationController.pourcentage}">
+                <f:selectItem itemLabel="10%" itemValue="10" />
+                <f:selectItem itemLabel="20%" itemValue="20" />
+                <f:selectItem itemLabel="30%" itemValue="30" />
+                <f:selectItem itemLabel="40%" itemValue="40" />
+                <f:selectItem itemLabel="50%" itemValue="50" />
+                <f:selectItem itemLabel="60%" itemValue="60" />
+                <f:selectItem itemLabel="70%" itemValue="70" />
+                <f:selectItem itemLabel="80%" itemValue="80" />
+                <f:selectItem itemLabel="90%" itemValue="90" />
+                <f:selectItem itemLabel="100%" itemValue="100" />
+            </h:selectOneMenu>
+
+            <h:commandButton value="Affecter project" action="#{AffectationController.affecterProject}" />
+        </h:panelGrid>
+
+    </h:form>
+
+</h:body>
+</html>
